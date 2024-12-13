@@ -8,8 +8,9 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
     return await getItems();
   }
 
-  Future<List<ItemModel>> getItems() async {
+  Future<List<ItemModel>> getItems({bool isBuild = true}) async {
     try {
+      if (isBuild == false) state = AsyncValue.loading();
       List<ItemModel> itemList = await ItemRepository.getItems();
       state = AsyncValue.data(itemList);
       return itemList;

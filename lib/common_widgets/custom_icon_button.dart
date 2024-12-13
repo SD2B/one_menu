@@ -17,6 +17,7 @@ class CustomIconButton extends StatelessWidget {
       onTap: () {
         onTap();
       },
+      borderRadius: BorderRadius.circular(100),
       child: Container(
         height: buttonSize ?? 38,
         width: buttonSize ?? 38,

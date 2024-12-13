@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
+  final double? height;
+  final double? width;
+  const LoadingWidget({super.key, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class LoadingWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          LottieBuilder.asset('assets/one_menu_loading.json', height: 50, width: 50, fit: BoxFit.fill),
+          LottieBuilder.asset('assets/one_menu_loading.json', height: height ?? 50, width: width ?? 50, fit: BoxFit.fill),
         ],
       ),
     );

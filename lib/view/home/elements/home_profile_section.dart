@@ -5,13 +5,10 @@ import 'package:one_menu/common_widgets/header_label.dart';
 import 'package:one_menu/common_widgets/loading_widget.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
-import 'package:one_menu/models/login_model.dart';
 import 'package:one_menu/vm/login_vm.dart';
 
 class HomeProfileSection extends ConsumerWidget {
-  const HomeProfileSection({
-    super.key,
-  });
+  const HomeProfileSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,7 +54,7 @@ class HomeProfileSection extends ConsumerWidget {
                                   fit: BoxFit.fill,
                                   width: double.infinity,
                                   height: double.infinity,
-                                  placeholder: (context, url) => const LoadingWidget(),
+                                  placeholder: (context, url) => const LoadingWidget(height: 40, width: 40),
                                   errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
                                 ),
                               ))
@@ -65,7 +62,7 @@ class HomeProfileSection extends ConsumerWidget {
                       );
                     },
                     error: (error, stackTrace) => ErrorWidget(error),
-                    loading: () => const LoadingWidget(),
+                    loading: () => const LoadingWidget(height: 40, width: 40),
                   ),
             ],
           ),

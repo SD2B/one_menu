@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:one_menu/common_widgets/custom_icon_button.dart';
 import 'package:one_menu/common_widgets/header_label.dart';
 import 'package:one_menu/core/colors.dart';
@@ -7,13 +8,12 @@ import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/item_model.dart';
 import 'package:one_menu/view/home/elements/item_card_image_section.dart';
 
-class ItemCard extends ConsumerWidget {
-  const ItemCard({super.key, required this.item});
-
+class ItemCard extends HookConsumerWidget {
   final ItemModel item;
-
+  const ItemCard({super.key, required this.item});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isFav = useState(false);
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: Column(
@@ -73,12 +73,14 @@ class ItemCard extends ConsumerWidget {
                   ),
                   7.width,
                   CustomIconButton(
-                    icon: Icons.favorite_border_rounded,
+                    icon: isFav.value ? Icons.favorite : Icons.favorite_border_rounded,
                     buttonSize: 24,
                     iconSize: 16,
-                    buttonColor: ColorCode.colorList(context).borderColor,
-                    iconColor: Colors.black,
-                    onTap: () {},
+                    buttonColor: isFav.value ? ColorCode.colorList(context).primary : ColorCode.colorList(context).borderColor,
+                    iconColor: isFav.value ? Colors.white : Colors.black,
+                    onTap: () {
+                      isFav.value = !isFav.value;
+                    },
                   )
                 ],
               ),
