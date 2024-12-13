@@ -1,4 +1,5 @@
 enum RouteEnum {
+  login,
   home,
   
 }

@@ -36,8 +36,7 @@ class LocalStorage {
 
   // Helper method to check if a table exists
   static Future<bool> _checkTableExists(Database db, String tableName) async {
-    final result = await db.rawQuery(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [tableName]);
+    final result = await db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [tableName]);
     return result.isNotEmpty;
   }
 
@@ -79,8 +78,7 @@ class LocalStorage {
   }
 
   /// Get (Query) data from a table
-  static Future<List<Map<String, dynamic>>> get(String tableName,
-      {Map<String, dynamic>? where, String? search, Map<String, dynamic>? notWhere, int? limit}) async {
+  static Future<List<Map<String, dynamic>>> get(String tableName, {Map<String, dynamic>? where, String? search, Map<String, dynamic>? notWhere, int? limit}) async {
     final db = await _getDatabase();
 
     // Building the WHERE clause
@@ -175,6 +173,4 @@ class LocalStorage {
 
 class DBTable {
   static String login = "login";
-  static String bills = "bills";
-  static String customers = "customers";
 }

@@ -3,56 +3,21 @@ import 'package:flutter/material.dart';
 class ColorList {
   final Color? primary;
   final Color? secondary;
-  final Color? constPrColor;
-  final Color? borderColor;
-  final Color? menuButtonColor;
+  final Color? labelColor;
   final Color? success;
-  final Color? successGreen;
-  final Color? ashWhiteLabel;
-  final Color? tabBarColor;
-  final Color? redWhiteOpacity;
-  final Color? redWhite;
-  final Color? redOpacityWhite;
-  final Color? cardColor;
-  final Color? greyWhite;
-  final Color? blackWhite;
-  final Color? whiteBlack;
-  final Color? textFieldHeder;
+  final Color? borderColor;
+  final Color? ratingColor;
 
-  ColorList({
-    this.successGreen,
-    this.primary,
-    this.secondary,
-    this.constPrColor,
-    this.borderColor,
-    this.menuButtonColor,
-    this.success,
-    this.ashWhiteLabel,
-    this.tabBarColor,
-    this.redWhiteOpacity,
-    this.redWhite,
-    this.redOpacityWhite,
-    this.cardColor,
-    this.greyWhite,
-    this.blackWhite,
-    this.whiteBlack,
-    this.textFieldHeder,
-  });
+  ColorList({this.primary, this.secondary, this.labelColor, this.success, this.borderColor, this.ratingColor});
 
   factory ColorList.light() {
     return ColorList(
-      borderColor: const Color(0xFFC4283C).withOpacity(.1),
       primary: const Color(0xFFE83D3D),
       secondary: const Color(0xFFE83D3D),
+      labelColor: const Color(0xFF6C7584),
+      borderColor: const Color(0xFFE5E8EC),
       success: const Color(0xFF007C5A),
-      ashWhiteLabel: const Color(0xFF909090),
-      tabBarColor: const Color(0xFFFFFFFF),
-      redWhiteOpacity: const Color(0xFFC4283C).withOpacity(.1),
-      redWhite: const Color(0xFFC4283C),
-      redOpacityWhite: const Color(0xFFC4283C).withOpacity(.1),
-      cardColor: const Color(0xFFFFFFFF),
-      greyWhite: const Color(0xFF808080),
-      textFieldHeder: const Color(0xFF242424),
+      ratingColor: const Color(0xFFF0A500),
     );
   }
 
@@ -60,6 +25,10 @@ class ColorList {
     return ColorList(
       primary: const Color(0xFFE83D3D),
       secondary: const Color(0xFFE83D3D),
+      labelColor: const Color(0xFF6C7584),
+      borderColor: const Color(0xFFE5E8EC),
+      success: const Color(0xFF007C5A),
+      ratingColor: const Color(0xFFF0A500),
     );
   }
 }
