@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quick_pro/common_widgets/header_label.dart';
+import 'package:one_menu/common_widgets/header_label.dart';
 
 
 class InProgress extends StatelessWidget {

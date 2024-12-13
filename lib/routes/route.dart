@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:quick_pro/helpers/common_enums.dart';
-import 'package:quick_pro/helpers/constants.dart';
+import 'package:one_menu/custom_scaffold.dart';
+import 'package:one_menu/helpers/common_enums.dart';
+import 'package:one_menu/helpers/constants.dart';
+import 'package:one_menu/view/home/home.dart';
 
 final GoRouter myRoute = GoRouter(
   initialLocation: "/",
@@ -23,7 +25,7 @@ List<RouteBase> _buildRoutes() {
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
           },
-          child: const Scaffold(body: SizedBox())),
+          child: const CustomScaffold(child: Home())),
       routes: [
         ..._staticRoutes(),
       ],
@@ -41,7 +43,7 @@ List<GoRoute> _staticRoutes() {
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
         },
-        child: const Scaffold(body: SizedBox()),
+        child: CustomScaffold(child: Home()),
       ),
     ),
   ];
