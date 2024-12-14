@@ -34,6 +34,13 @@ _$ItemModelImpl _$$ItemModelImplFromJson(Map<String, dynamic> json) =>
       code: json['code'] as String?,
       rating: (json['rating'] as num?)?.toDouble() ?? 0.00,
       imageUrl: json['image_url'] as String?,
+      image: json['image'] as String?,
+      wholesaleStock: (json['whole_sale_stock'] as num?)?.toInt(),
+      minSalesOrderLimit: (json['min_sales_order_limit'] as num?)?.toInt(),
+      maxSalesOrderLimit: (json['max_sales_order_limit'] as num?)?.toInt(),
+      stockWarning: json['stock_warning'] as bool? ?? true,
+      isActive: json['is_active'] as bool? ?? true,
+      isDeleted: json['is_deleted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ItemModelImplToJson(_$ItemModelImpl instance) =>
@@ -48,6 +55,13 @@ Map<String, dynamic> _$$ItemModelImplToJson(_$ItemModelImpl instance) =>
       'code': instance.code,
       'rating': instance.rating,
       'image_url': instance.imageUrl,
+      'image': instance.image,
+      'whole_sale_stock': instance.wholesaleStock,
+      'min_sales_order_limit': instance.minSalesOrderLimit,
+      'max_sales_order_limit': instance.maxSalesOrderLimit,
+      'stock_warning': instance.stockWarning,
+      'is_active': instance.isActive,
+      'is_deleted': instance.isDeleted,
     };
 
 _$ItemWeightsModelImpl _$$ItemWeightsModelImplFromJson(

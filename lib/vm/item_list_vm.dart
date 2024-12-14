@@ -18,6 +18,11 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
       throw Exception('Failed to load items: $e');
     }
   }
+
+  Future<bool> addMenu(ItemModel model) async {
+    bool res = await ItemRepository.addMenu(model);
+    return res;
+  }
 }
 
 final itemListVMProvider = AsyncNotifierProvider<ItemListVM, List<ItemModel>>(ItemListVM.new);

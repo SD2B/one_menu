@@ -24,6 +24,13 @@ class ItemModel with _$ItemModel {
     String? code,
     @Default(0.00) double rating,
     @JsonKey(name: "image_url") String? imageUrl,
+    String? image,
+    @JsonKey(name: "whole_sale_stock") int? wholesaleStock,
+    @JsonKey(name: "min_sales_order_limit") int? minSalesOrderLimit,
+    @JsonKey(name: "max_sales_order_limit") int? maxSalesOrderLimit,
+    @JsonKey(name: "stock_warning") @Default(true) bool stockWarning,
+    @JsonKey(name: "is_active") @Default(true) bool isActive,
+    @JsonKey(name: "is_deleted") @Default(false) bool isDeleted,
   }) = _ItemModel;
 
   factory ItemModel.fromJson(Map<String, dynamic> json) => _$ItemModelFromJson(json);

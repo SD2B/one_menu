@@ -7,8 +7,9 @@ class ColorList {
   final Color? success;
   final Color? borderColor;
   final Color? ratingColor;
+  final Color? customTextColor;
 
-  ColorList({this.primary, this.secondary, this.labelColor, this.success, this.borderColor, this.ratingColor});
+  ColorList({this.primary, this.secondary, this.labelColor, this.success, this.borderColor, this.ratingColor, this.customTextColor});
 
   factory ColorList.light() {
     return ColorList(
@@ -18,6 +19,7 @@ class ColorList {
       borderColor: const Color(0xFFE5E8EC),
       success: const Color(0xFF007C5A),
       ratingColor: const Color(0xFFF0A500),
+      customTextColor: const Color(0xFF1D2F47),
     );
   }
 
@@ -29,6 +31,7 @@ class ColorList {
       borderColor: const Color(0xFFE5E8EC),
       success: const Color(0xFF007C5A),
       ratingColor: const Color(0xFFF0A500),
+      customTextColor: const Color(0xFF1D2F47),
     );
   }
 }

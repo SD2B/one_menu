@@ -190,6 +190,19 @@ mixin _$ItemModel {
   double get rating => throw _privateConstructorUsedError;
   @JsonKey(name: "image_url")
   String? get imageUrl => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  @JsonKey(name: "whole_sale_stock")
+  int? get wholesaleStock => throw _privateConstructorUsedError;
+  @JsonKey(name: "min_sales_order_limit")
+  int? get minSalesOrderLimit => throw _privateConstructorUsedError;
+  @JsonKey(name: "max_sales_order_limit")
+  int? get maxSalesOrderLimit => throw _privateConstructorUsedError;
+  @JsonKey(name: "stock_warning")
+  bool get stockWarning => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_active")
+  bool get isActive => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_deleted")
+  bool get isDeleted => throw _privateConstructorUsedError;
 
   /// Serializes this ItemModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -216,7 +229,14 @@ abstract class $ItemModelCopyWith<$Res> {
       @JsonKey(name: "barcode") ItemBarcodeModel? barcode,
       String? code,
       double rating,
-      @JsonKey(name: "image_url") String? imageUrl});
+      @JsonKey(name: "image_url") String? imageUrl,
+      String? image,
+      @JsonKey(name: "whole_sale_stock") int? wholesaleStock,
+      @JsonKey(name: "min_sales_order_limit") int? minSalesOrderLimit,
+      @JsonKey(name: "max_sales_order_limit") int? maxSalesOrderLimit,
+      @JsonKey(name: "stock_warning") bool stockWarning,
+      @JsonKey(name: "is_active") bool isActive,
+      @JsonKey(name: "is_deleted") bool isDeleted});
 
   $ItemWeightsModelCopyWith<$Res>? get weights;
   $ItemBarcodeModelCopyWith<$Res>? get barcode;
@@ -247,6 +267,13 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
     Object? code = freezed,
     Object? rating = null,
     Object? imageUrl = freezed,
+    Object? image = freezed,
+    Object? wholesaleStock = freezed,
+    Object? minSalesOrderLimit = freezed,
+    Object? maxSalesOrderLimit = freezed,
+    Object? stockWarning = null,
+    Object? isActive = null,
+    Object? isDeleted = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -289,6 +316,34 @@ class _$ItemModelCopyWithImpl<$Res, $Val extends ItemModel>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wholesaleStock: freezed == wholesaleStock
+          ? _value.wholesaleStock
+          : wholesaleStock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      minSalesOrderLimit: freezed == minSalesOrderLimit
+          ? _value.minSalesOrderLimit
+          : minSalesOrderLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxSalesOrderLimit: freezed == maxSalesOrderLimit
+          ? _value.maxSalesOrderLimit
+          : maxSalesOrderLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stockWarning: null == stockWarning
+          ? _value.stockWarning
+          : stockWarning // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -339,7 +394,14 @@ abstract class _$$ItemModelImplCopyWith<$Res>
       @JsonKey(name: "barcode") ItemBarcodeModel? barcode,
       String? code,
       double rating,
-      @JsonKey(name: "image_url") String? imageUrl});
+      @JsonKey(name: "image_url") String? imageUrl,
+      String? image,
+      @JsonKey(name: "whole_sale_stock") int? wholesaleStock,
+      @JsonKey(name: "min_sales_order_limit") int? minSalesOrderLimit,
+      @JsonKey(name: "max_sales_order_limit") int? maxSalesOrderLimit,
+      @JsonKey(name: "stock_warning") bool stockWarning,
+      @JsonKey(name: "is_active") bool isActive,
+      @JsonKey(name: "is_deleted") bool isDeleted});
 
   @override
   $ItemWeightsModelCopyWith<$Res>? get weights;
@@ -370,6 +432,13 @@ class __$$ItemModelImplCopyWithImpl<$Res>
     Object? code = freezed,
     Object? rating = null,
     Object? imageUrl = freezed,
+    Object? image = freezed,
+    Object? wholesaleStock = freezed,
+    Object? minSalesOrderLimit = freezed,
+    Object? maxSalesOrderLimit = freezed,
+    Object? stockWarning = null,
+    Object? isActive = null,
+    Object? isDeleted = null,
   }) {
     return _then(_$ItemModelImpl(
       id: freezed == id
@@ -412,6 +481,34 @@ class __$$ItemModelImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
+      wholesaleStock: freezed == wholesaleStock
+          ? _value.wholesaleStock
+          : wholesaleStock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      minSalesOrderLimit: freezed == minSalesOrderLimit
+          ? _value.minSalesOrderLimit
+          : minSalesOrderLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxSalesOrderLimit: freezed == maxSalesOrderLimit
+          ? _value.maxSalesOrderLimit
+          : maxSalesOrderLimit // ignore: cast_nullable_to_non_nullable
+              as int?,
+      stockWarning: null == stockWarning
+          ? _value.stockWarning
+          : stockWarning // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -429,7 +526,14 @@ class _$ItemModelImpl implements _ItemModel {
       @JsonKey(name: "barcode") this.barcode,
       this.code,
       this.rating = 0.00,
-      @JsonKey(name: "image_url") this.imageUrl});
+      @JsonKey(name: "image_url") this.imageUrl,
+      this.image,
+      @JsonKey(name: "whole_sale_stock") this.wholesaleStock,
+      @JsonKey(name: "min_sales_order_limit") this.minSalesOrderLimit,
+      @JsonKey(name: "max_sales_order_limit") this.maxSalesOrderLimit,
+      @JsonKey(name: "stock_warning") this.stockWarning = true,
+      @JsonKey(name: "is_active") this.isActive = true,
+      @JsonKey(name: "is_deleted") this.isDeleted = false});
 
   factory _$ItemModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ItemModelImplFromJson(json);
@@ -458,10 +562,30 @@ class _$ItemModelImpl implements _ItemModel {
   @override
   @JsonKey(name: "image_url")
   final String? imageUrl;
+  @override
+  final String? image;
+  @override
+  @JsonKey(name: "whole_sale_stock")
+  final int? wholesaleStock;
+  @override
+  @JsonKey(name: "min_sales_order_limit")
+  final int? minSalesOrderLimit;
+  @override
+  @JsonKey(name: "max_sales_order_limit")
+  final int? maxSalesOrderLimit;
+  @override
+  @JsonKey(name: "stock_warning")
+  final bool stockWarning;
+  @override
+  @JsonKey(name: "is_active")
+  final bool isActive;
+  @override
+  @JsonKey(name: "is_deleted")
+  final bool isDeleted;
 
   @override
   String toString() {
-    return 'ItemModel(id: $id, name: $name, price: $price, description: $description, category: $category, weights: $weights, barcode: $barcode, code: $code, rating: $rating, imageUrl: $imageUrl)';
+    return 'ItemModel(id: $id, name: $name, price: $price, description: $description, category: $category, weights: $weights, barcode: $barcode, code: $code, rating: $rating, imageUrl: $imageUrl, image: $image, wholesaleStock: $wholesaleStock, minSalesOrderLimit: $minSalesOrderLimit, maxSalesOrderLimit: $maxSalesOrderLimit, stockWarning: $stockWarning, isActive: $isActive, isDeleted: $isDeleted)';
   }
 
   @override
@@ -481,13 +605,43 @@ class _$ItemModelImpl implements _ItemModel {
             (identical(other.code, code) || other.code == code) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.image, image) || other.image == image) &&
+            (identical(other.wholesaleStock, wholesaleStock) ||
+                other.wholesaleStock == wholesaleStock) &&
+            (identical(other.minSalesOrderLimit, minSalesOrderLimit) ||
+                other.minSalesOrderLimit == minSalesOrderLimit) &&
+            (identical(other.maxSalesOrderLimit, maxSalesOrderLimit) ||
+                other.maxSalesOrderLimit == maxSalesOrderLimit) &&
+            (identical(other.stockWarning, stockWarning) ||
+                other.stockWarning == stockWarning) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, price, description,
-      category, weights, barcode, code, rating, imageUrl);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      price,
+      description,
+      category,
+      weights,
+      barcode,
+      code,
+      rating,
+      imageUrl,
+      image,
+      wholesaleStock,
+      minSalesOrderLimit,
+      maxSalesOrderLimit,
+      stockWarning,
+      isActive,
+      isDeleted);
 
   /// Create a copy of ItemModel
   /// with the given fields replaced by the non-null parameter values.
@@ -516,7 +670,14 @@ abstract class _ItemModel implements ItemModel {
       @JsonKey(name: "barcode") final ItemBarcodeModel? barcode,
       final String? code,
       final double rating,
-      @JsonKey(name: "image_url") final String? imageUrl}) = _$ItemModelImpl;
+      @JsonKey(name: "image_url") final String? imageUrl,
+      final String? image,
+      @JsonKey(name: "whole_sale_stock") final int? wholesaleStock,
+      @JsonKey(name: "min_sales_order_limit") final int? minSalesOrderLimit,
+      @JsonKey(name: "max_sales_order_limit") final int? maxSalesOrderLimit,
+      @JsonKey(name: "stock_warning") final bool stockWarning,
+      @JsonKey(name: "is_active") final bool isActive,
+      @JsonKey(name: "is_deleted") final bool isDeleted}) = _$ItemModelImpl;
 
   factory _ItemModel.fromJson(Map<String, dynamic> json) =
       _$ItemModelImpl.fromJson;
@@ -544,6 +705,26 @@ abstract class _ItemModel implements ItemModel {
   @override
   @JsonKey(name: "image_url")
   String? get imageUrl;
+  @override
+  String? get image;
+  @override
+  @JsonKey(name: "whole_sale_stock")
+  int? get wholesaleStock;
+  @override
+  @JsonKey(name: "min_sales_order_limit")
+  int? get minSalesOrderLimit;
+  @override
+  @JsonKey(name: "max_sales_order_limit")
+  int? get maxSalesOrderLimit;
+  @override
+  @JsonKey(name: "stock_warning")
+  bool get stockWarning;
+  @override
+  @JsonKey(name: "is_active")
+  bool get isActive;
+  @override
+  @JsonKey(name: "is_deleted")
+  bool get isDeleted;
 
   /// Create a copy of ItemModel
   /// with the given fields replaced by the non-null parameter values.

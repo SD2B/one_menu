@@ -21,4 +21,13 @@ class ItemRepository {
       return itemList;
     }
   }
+
+  static Future<bool> addMenu(ItemModel model) async {
+    try {
+      await apiClient.post(ApiHelper.addMenu, model.toJson());
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 }

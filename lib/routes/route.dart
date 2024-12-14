@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_menu/common_widgets/no_data_found.dart';
+import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/custom_scaffold.dart';
 import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/helpers/constants.dart';
@@ -8,6 +9,7 @@ import 'package:one_menu/helpers/local_storage.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/view/home/home.dart';
 import 'package:one_menu/view/login_screen.dart';
+import 'package:one_menu/view/profile/profile.dart';
 import 'package:one_menu/view/splash_screen.dart';
 
 final GoRouter myRoute = GoRouter(
@@ -62,6 +64,7 @@ List<GoRoute> _staticRoutes() {
         },
         child: const CustomScaffold(child: Home()),
       ),
+      routes: [..._homeRoutes()],
     ),
     GoRoute(
       path: RouteEnum.login.name,
@@ -72,6 +75,38 @@ List<GoRoute> _staticRoutes() {
           return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
         },
         child: const CustomScaffold(child: LoginScreen()),
+      ),
+    ),
+  ];
+}
+
+List<GoRoute> _homeRoutes() {
+  return [
+    GoRoute(
+      path: RouteEnum.profile.name,
+      name: RouteEnum.profile.name,
+      pageBuilder: (BuildContext context, GoRouterState state) => CustomTransitionPage(
+        key: state.pageKey,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
+        },
+        child: CustomScaffold(
+            backgroundColor: ColorCode.colorList(context).primary,
+            // appBar: AppBar(
+            //   // backgroundColor: ColorCode.colorList(context).primary,
+            //   backgroundColor: Colors.transparent,
+            //   leading: IconButton(
+            //       onPressed: () => GoRouter.of(context).pop(),
+            //       icon: const Icon(
+            //         Icons.arrow_back,
+            //         color: Colors.white,
+            //       )),
+            //   title: Text(
+            //     "Profile",
+            //     style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 28, color: Colors.white, fontWeight: FontWeight.w400),
+            //   ),
+            // ),
+            child: const Profile()),
       ),
     ),
   ];
