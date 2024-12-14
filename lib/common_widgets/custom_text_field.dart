@@ -16,6 +16,8 @@ class CustomTextField extends HookWidget {
   final bool isPassword;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
+  final Widget? suffix;
+  final double? boarderRadius;
 
   const CustomTextField({
     super.key,
@@ -31,6 +33,8 @@ class CustomTextField extends HookWidget {
     this.isPassword = false,
     this.validator,
     this.textInputType,
+    this.suffix,
+    this.boarderRadius,
   });
 
   @override
@@ -56,32 +60,32 @@ class CustomTextField extends HookWidget {
           labelText: label,
           labelStyle: Theme.of(context).textTheme.bodySmall,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(boarderRadius??8),
             borderSide: BorderSide(
               color: Colors.grey[100]!,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(boarderRadius??8),
             borderSide: BorderSide(
               color: ColorCode.colorList(context).primary!,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(boarderRadius??8),
             borderSide: BorderSide(
               color: ColorCode.colorList(context).borderColor!,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(boarderRadius??8),
             borderSide: const BorderSide(
               color: Colors.red,
               width: 1.0,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(boarderRadius??8),
             borderSide: const BorderSide(
               color: Colors.red,
               width: 1.0,
@@ -91,17 +95,18 @@ class CustomTextField extends HookWidget {
                 fontSize: 12,
                 color: Colors.red,
               ),
-          suffixIcon: isPassword
-              ? IconButton(
-                  icon: Icon(
-                    obscureText.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                    color: Colors.grey,
-                  ),
-                  onPressed: () {
-                    obscureText.value = !obscureText.value;
-                  },
-                )
-              : null,
+          suffixIcon: suffix ??
+              (isPassword
+                  ? IconButton(
+                      icon: Icon(
+                        obscureText.value ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        obscureText.value = !obscureText.value;
+                      },
+                    )
+                  : null),
         ),
         inputFormatters: inputFormatters,
         onChanged: onChanged,

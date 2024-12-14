@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_menu/common_widgets/loading_widget.dart';
+import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/view/home/elements/item_card.dart';
 import 'package:one_menu/vm/item_list_vm.dart';
 
@@ -22,7 +24,7 @@ class ItemListView extends ConsumerWidget {
                     itemCount: itemList.length,
                     itemBuilder: (context, index) {
                       ItemModel item = itemList[index];
-                      return ItemCard(item: item);
+                      return InkWell(onTap: () => context.pushNamed(RouteEnum.itemView.name, pathParameters: {"id": "${item.id}"}), child: ItemCard(item: item));
                     });
               },
               error: (error, stackTrace) => ErrorWidget(error),

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_menu/core/colors.dart';
+import 'package:one_menu/custom_scaffold.dart';
+import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/login_model.dart';
 import 'package:one_menu/view/profile/elemets/profile_tiles.dart';
@@ -28,7 +31,7 @@ class ProfileBody extends StatelessWidget {
             30.height,
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onTap: () {},
+              onTap: () => context.pushNamed(RouteEnum.favourites.name),
               child: Container(
                 width: context.width(),
                 height: 56,
@@ -63,5 +66,7 @@ class ProfileBody extends StatelessWidget {
         ),
       ),
     );
+ 
+ 
   }
 }

@@ -3,5 +3,6 @@ enum RouteEnum {
   home,
   profile,
   addMenu,
+  itemView,
   favourites,
 }

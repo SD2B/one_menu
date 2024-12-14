@@ -10,6 +10,8 @@ class ApiHelper {
 
   static String login = "login";
   static String getItemList = 'food/list';
+  static String getNDelete(int id) => 'food/read-delete/$id';
+
   static String addMenu = 'food/create';
 
   ApiHelper(this.baseUrl);

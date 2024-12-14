@@ -21,7 +21,7 @@ class Profile extends ConsumerWidget {
                 ...ProfileBackground.background(context),
                 ProfileBody(user: user),
                 ProfileImage(user: user),
-                const ProfileAppBar(),
+                const CustomAppBar(),
               ],
             );
           },

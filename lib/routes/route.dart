@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:one_menu/common_widgets/no_data_found.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/custom_scaffold.dart';
 import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/helpers/constants.dart';
 import 'package:one_menu/helpers/local_storage.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
+import 'package:one_menu/view/favorites/favorites.dart';
 import 'package:one_menu/view/home/home.dart';
 import 'package:one_menu/view/login_screen.dart';
+import 'package:one_menu/view/menu/view/item_view.dart';
 import 'package:one_menu/view/profile/profile.dart';
-import 'package:one_menu/view/splash_screen.dart';
 
 final GoRouter myRoute = GoRouter(
   initialLocation: "/",
@@ -22,6 +23,7 @@ final GoRouter myRoute = GoRouter(
   routes: _buildRoutes(),
 );
 
+final Future<bool?> loginFuture = getLoginData();
 List<RouteBase> _buildRoutes() {
   return [
     GoRoute(
@@ -29,27 +31,44 @@ List<RouteBase> _buildRoutes() {
       name: '/',
       parentNavigatorKey: ConstantData.navigatorKey,
       pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
+        key: state.pageKey,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation),
+            child: child,
+          );
+        },
+        child: FutureBuilder<bool?>(
+          future: loginFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Onboarding();
+            }
+            if (snapshot.hasError || snapshot.data == null || snapshot.data == false) {
+              return const CustomScaffold(child: LoginScreen());
+            }
+            return const CustomScaffold(child: Home());
           },
-          child: FutureBuilder(
-            future: getLoginData(),
-            builder: (context, snapshot) {
-              qp(snapshot.data.runtimeType, "================");
-              if (snapshot.data == null) {
-                return const CustomScaffold(child: SplashScreen());
-              } else if (snapshot.data == false) {
-                return const CustomScaffold(child: LoginScreen());
-              }
-              return const CustomScaffold(child: Home());
-            },
-          )),
+        ),
+      ),
       routes: [
         ..._staticRoutes(),
       ],
     ),
   ];
+}
+
+class Onboarding extends StatelessWidget {
+  const Onboarding({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SvgPicture.asset("assets/oneMenu.svg"),
+      ),
+    );
+  }
 }
 
 List<GoRoute> _staticRoutes() {
@@ -90,29 +109,58 @@ List<GoRoute> _homeRoutes() {
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
         },
-        child: CustomScaffold(
-            backgroundColor: ColorCode.colorList(context).primary,
-            // appBar: AppBar(
-            //   // backgroundColor: ColorCode.colorList(context).primary,
-            //   backgroundColor: Colors.transparent,
-            //   leading: IconButton(
-            //       onPressed: () => GoRouter.of(context).pop(),
-            //       icon: const Icon(
-            //         Icons.arrow_back,
-            //         color: Colors.white,
-            //       )),
-            //   title: Text(
-            //     "Profile",
-            //     style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 28, color: Colors.white, fontWeight: FontWeight.w400),
-            //   ),
-            // ),
-            child: const Profile()),
+        child: CustomScaffold(backgroundColor: ColorCode.colorList(context).primary, child: const Profile()),
       ),
     ),
+    GoRoute(
+      path: RouteEnum.favourites.name,
+      name: RouteEnum.favourites.name,
+      pageBuilder: (BuildContext context, GoRouterState state) => CustomTransitionPage(
+        key: state.pageKey,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
+        },
+        child: const CustomScaffold(enableBack: true, child: Favorites()),
+      ),
+    ),
+    GoRoute(
+      path: '${RouteEnum.itemView.name}/:id', // Define the path with the parameter :id
+      name: RouteEnum.itemView.name,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        final id = int.tryParse(state.pathParameters['id'] ?? ''); // Convert the 'id' to an int
+        // if (id == null) {
+        //   return ErrorPage(); // Handle invalid 'id'
+        // }
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation),
+              child: child,
+            );
+          },
+          child: ItemView(id: id ?? 0), // Pass the 'id' as an integer
+        );
+      },
+    )
+
+    // GoRoute(
+    //   path: RouteEnum.itemView.name,
+    //   name: RouteEnum.itemView.name,
+    //   pageBuilder: (BuildContext context, GoRouterState state) => CustomTransitionPage(
+    //     key: state.pageKey,
+    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    //       return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
+    //     },
+    //     child: const ItemView(),
+    //   ),
+    // ),
   ];
 }
 
-getLoginData() async {
+Future<bool> getLoginData() async {
+  await Future.delayed(const Duration(seconds: 3)); // Add 3-second delay
+
   try {
     List<Map<String, dynamic>> loginData = await LocalStorage.get(DBTable.login);
     if (loginData.isEmpty) return false;

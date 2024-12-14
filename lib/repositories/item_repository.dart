@@ -22,6 +22,21 @@ class ItemRepository {
     }
   }
 
+  static Future<ItemModel> getItem(int id) async {
+    ItemModel model = const ItemModel();
+    try {
+      final response = await apiClient.get(ApiHelper.getNDelete(id));
+      qp('Food item: $response');
+      if (response != null) {
+        model = ItemModel.fromJson(response);
+      }
+      return model;
+    } catch (e) {
+      qp('Failed to list food items: $e');
+      return model;
+    }
+  }
+
   static Future<bool> addMenu(ItemModel model) async {
     try {
       await apiClient.post(ApiHelper.addMenu, model.toJson());
