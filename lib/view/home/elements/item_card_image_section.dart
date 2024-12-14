@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:one_menu/common_widgets/loading_widget.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/item_model.dart';
@@ -23,7 +24,7 @@ class ItemCardImageSection extends StatelessWidget {
                 fit: BoxFit.fill,
                 width: double.infinity,
                 height: double.infinity,
-                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                placeholder: (context, url) => const LoadingWidget(),
                 errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
               ),
             )
