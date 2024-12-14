@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/custom_scaffold.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:one_menu/helpers/local_storage.dart';
-import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/login_model.dart';
 import 'package:one_menu/repositories/login_repository.dart';
 
@@ -18,7 +17,6 @@ class LoginVM extends AsyncNotifier<LoginResponseModel> {
       List<Map<String, dynamic>> loginData = await LocalStorage.get(DBTable.login);
       return responseModel = responseModel.copyWith(user: UserModel.fromJson(loginData.first));
     } catch (e) {
-      qp(e, "getLoginDataErrorrrrr");
       return const LoginResponseModel(message: "getLoginDataError");
     }
   }

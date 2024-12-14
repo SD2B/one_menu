@@ -10,7 +10,6 @@ import 'helpers/api_helper.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -24,8 +23,6 @@ class MyApp extends StatelessWidget {
       title: 'One Menu',
       theme: MyTheme.getThemeData(ThemeMode.light),
       themeMode: ThemeMode.light,
-      // themeMode:
-      //     ref.watch(mainVM).isLightTheme ? ThemeMode.light : ThemeMode.dark,
       darkTheme: MyTheme.getThemeData(ThemeMode.dark),
       routerConfig: myRoute,
     );

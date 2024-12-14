@@ -26,7 +26,6 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
   Future<ItemModel> getItem(int id) async {
     try {
       ItemModel model = await ItemRepository.getItem(id);
-      qp(model, ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
       return model;
     } catch (e) {
       throw Exception('Failed to load item: $e');
@@ -41,12 +40,9 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
   Future<dynamic> uploadImage(File image) async {
     try {
       if (!await image.exists()) {
-        qp('File does not exist: ${image.path}');
         return;
       }
-      qp('Uploading image: ${image.path}, Size: ${await image.length()} bytes');
       final response = await fileClient.uploadFile(ApiHelper.fileUpload, image, 'file');
-      qp('Image uploaded successfully: $response');
       return response;
     } catch (e) {
       qp('Image upload failed: $e');
