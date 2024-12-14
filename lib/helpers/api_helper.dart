@@ -10,6 +10,7 @@ class ApiHelper {
 
   static String login = "login";
   static String getItemList = 'food/list';
+  static String fileUpload = 'files/upload';
   static String getNDelete(int id) => 'food/read-delete/$id';
 
   static String addMenu = 'food/create';
@@ -57,15 +58,14 @@ class ApiHelper {
   Future<dynamic> uploadFile(String endpoint, File file, String keyName) async {
     final url = Uri.parse('$baseUrl$endpoint');
     try {
-      final request = http.MultipartRequest('POST', url);
-      request.files.add(await http.MultipartFile.fromPath(keyName, file.path));
+      final request = http.MultipartRequest('POST', url)..files.add(await http.MultipartFile.fromPath(keyName, file.path));
       final response = await request.send();
-
-      if (response.statusCode == 200) {
-        final responseData = await response.stream.bytesToString();
-        return jsonDecode(responseData);
+      final responseBody = await response.stream.bytesToString();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(responseBody);
+        return data['location'];
       } else {
-        throw Exception('File upload failed: ${response.statusCode}');
+        throw Exception('File upload failed with status: ${response.statusCode}, body: $responseBody');
       }
     } catch (e) {
       throw Exception('File upload error: $e');

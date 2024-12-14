@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:one_menu/helpers/api_helper.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/item_model.dart';
 import 'package:one_menu/repositories/item_repository.dart';
@@ -11,7 +14,7 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
 
   Future<List<ItemModel>> getItems({bool isBuild = true}) async {
     try {
-      if (isBuild == false) state = AsyncValue.loading();
+      if (isBuild == false) state = const AsyncValue.loading();
       List<ItemModel> itemList = await ItemRepository.getItems();
       state = AsyncValue.data(itemList);
       return itemList;
@@ -34,18 +37,21 @@ class ItemListVM extends AsyncNotifier<List<ItemModel>> {
     bool res = await ItemRepository.addMenu(model);
     return res;
   }
+
+  Future<dynamic> uploadImage(File image) async {
+    try {
+      if (!await image.exists()) {
+        qp('File does not exist: ${image.path}');
+        return;
+      }
+      qp('Uploading image: ${image.path}, Size: ${await image.length()} bytes');
+      final response = await fileClient.uploadFile(ApiHelper.fileUpload, image, 'file');
+      qp('Image uploaded successfully: $response');
+      return response;
+    } catch (e) {
+      qp('Image upload failed: $e');
+    }
+  }
 }
-
-// class ItemVM extends AsyncNotifier<ItemModel> {
-//   @override
-//   Future<ItemModel> build() async {
-//     return await getItem();
-//   }
-
-//   Future<bool> addMenu(ItemModel model) async {
-//     bool res = await ItemRepository.addMenu(model);
-//     return res;
-//   }
-// }
 
 final itemListVMProvider = AsyncNotifierProvider<ItemListVM, List<ItemModel>>(ItemListVM.new);

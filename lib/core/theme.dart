@@ -5,7 +5,6 @@ class MyTheme {
     if (themeMode == ThemeMode.light) {
       return ThemeData(
         brightness: Brightness.light,
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         textTheme: const TextTheme(
           titleLarge: TextStyle(fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
           titleMedium: TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
@@ -22,7 +21,6 @@ class MyTheme {
     } else {
       return ThemeData(
         brightness: Brightness.dark,
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         textTheme: const TextTheme(
           titleLarge: TextStyle(fontSize: 24, color: Colors.white, fontWeight: FontWeight.bold),
           titleMedium: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),

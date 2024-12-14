@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_menu/core/colors.dart';
 
 class HeaderLabel extends StatelessWidget {
   final String header;

@@ -19,12 +19,9 @@ class ItemCardFooter extends HookConsumerWidget {
     return Container(
       height: isItemView ? 92 : 67,
       width: context.width(),
-      decoration: BoxDecoration(
-        border: isItemView ? Border(bottom: BorderSide(color: ColorCode.colorList(context).borderColor!)) : Border.all(color: ColorCode.colorList(context).borderColor!),
-        borderRadius: isItemView ? null : const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-      ),
+      decoration: BoxDecoration(border: isItemView ? Border(bottom: BorderSide(color: ColorCode.colorList(context).borderColor!)) : Border.all(color: ColorCode.colorList(context).borderColor!), borderRadius: isItemView ? null : const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 16, top: 12),
+        padding: EdgeInsets.only(bottom: 16, top: 12, left: isItemView ? 0 : 12, right: isItemView ? 0 : 12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -34,16 +31,8 @@ class ItemCardFooter extends HookConsumerWidget {
                 HeaderLabel(
                   header: (item.name ?? "").toTitleCase(),
                   subHeader: "\$${item.price}",
-                  headerStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: isItemView ? 20 : 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
-                  subHeaderStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: isItemView ? 14 : 11,
-                        fontWeight: isItemView ? FontWeight.w700 : FontWeight.w500,
-                        color: ColorCode.colorList(context).labelColor,
-                      ),
+                  headerStyle: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: isItemView ? 20 : 14, fontWeight: FontWeight.w700, color: Colors.black),
+                  subHeaderStyle: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: isItemView ? 14 : 11, fontWeight: isItemView ? FontWeight.w700 : FontWeight.w500, color: ColorCode.colorList(context).labelColor),
                 )
               ],
             ),
@@ -56,9 +45,7 @@ class ItemCardFooter extends HookConsumerWidget {
               iconSize: isItemView ? 18 : 16,
               buttonColor: isFav.value ? ColorCode.colorList(context).primary : ColorCode.colorList(context).borderColor,
               iconColor: isFav.value ? Colors.white : Colors.black,
-              onTap: () {
-                isFav.value = !isFav.value;
-              },
+              onTap: () => isFav.value = !isFav.value,
             )
           ],
         ),

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:one_menu/common_widgets/custom_text_field.dart';
@@ -46,7 +45,6 @@ class FavoriteItems extends HookConsumerWidget {
           Expanded(
             child: ref.watch(itemListVMProvider).when(
                   data: (itemList) {
-                    // Filter the items based on the search query
                     final filteredList = itemList.where((item) {
                       final itemName = item.name?.toLowerCase() ?? "";
                       return itemName.contains(searchQuery.value);
@@ -74,12 +72,12 @@ class FavoriteItems extends HookConsumerWidget {
                             height: 56,
                             width: 56,
                             decoration: BoxDecoration(shape: BoxShape.circle, color: ColorCode.colorList(context).borderColor),
-                            child: item.imageUrl?.isEmpty == true || item.imageUrl == null
+                            child: item.image?.isEmpty == true || item.image == null
                                 ? const Center(child: Icon(Icons.image_not_supported))
                                 : ClipRRect(
                                     borderRadius: BorderRadius.circular(100),
                                     child: CachedNetworkImage(
-                                      imageUrl: item.imageUrl ?? "",
+                                      imageUrl: item.image ?? "",
                                       fit: BoxFit.fill,
                                       width: double.infinity,
                                       height: double.infinity,

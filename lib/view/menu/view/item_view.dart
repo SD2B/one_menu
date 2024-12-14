@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:one_menu/common_widgets/bulletin_text.dart';
-import 'package:one_menu/common_widgets/header_label.dart';
 import 'package:one_menu/common_widgets/loading_widget.dart';
 import 'package:one_menu/common_widgets/title_value.dart';
 import 'package:one_menu/core/colors.dart';
@@ -11,7 +9,7 @@ import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/models/item_model.dart';
 import 'package:one_menu/models/ui_model.dart';
 import 'package:one_menu/view/home/elements/item_card_footer.dart';
-import 'package:one_menu/view/profile/elemets/profile_app_bar.dart';
+import 'package:one_menu/common_widgets/custom_appbar.dart';
 import 'package:one_menu/vm/item_list_vm.dart';
 
 class ItemView extends ConsumerWidget {
@@ -37,7 +35,7 @@ class ItemView extends ConsumerWidget {
                         decoration: BoxDecoration(color: ColorCode.colorList(context).borderColor),
                         child: CachedNetworkImage(
                           // imageUrl: "https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg",
-                          imageUrl: "${item?.imageUrl}",
+                          imageUrl: "${item?.image}",
                           fit: BoxFit.fill,
                           width: double.infinity,
                           height: double.infinity,
@@ -63,10 +61,7 @@ class ItemView extends ConsumerWidget {
                                 children: [
                                   ItemCardFooter(item: item ?? const ItemModel(), isItemView: true),
                                   20.height,
-                                  TitleValue(
-                                    title: "Description",
-                                    value: "${item?.description}",
-                                  ),
+                                  TitleValue(title: "Description", value: "${item?.description}"),
                                   25.height,
                                   const TitleValue(
                                     title: "Ingredients",
@@ -97,7 +92,6 @@ class ItemView extends ConsumerWidget {
                                                   padding: EdgeInsets.only(right: (_tempUiList.last == e) ? 0 : 12),
                                                   child: Container(
                                                     height: 56,
-                                                    // margin: EdgeInsets.only(right: (_tempUiList.last == e) ? 0 : 12),
                                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), border: Border.all(color: ColorCode.colorList(context).borderColor!)),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.center,

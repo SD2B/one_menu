@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
       onTap: () {
         onTap();
       },
-      child: width == null ? Expanded(child: CustomButtonCard(width: width, height: height, type: type, text: text, isLoading: isLoading)) : CustomButtonCard(width: width, height: height, type: type, text: text, isLoading: isLoading),
+      child: width == null ? Expanded(child: CustomButtonCard(width: width, height: height, type: type, text: text, isLoading: isLoading, style: style)) : CustomButtonCard(width: width, height: height, type: type, text: text, isLoading: isLoading, style: style),
     );
   }
 }

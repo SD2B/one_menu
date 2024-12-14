@@ -7,7 +7,6 @@ import 'package:one_menu/common_widgets/loading_widget.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
-import 'package:one_menu/routes/route.dart';
 import 'package:one_menu/vm/login_vm.dart';
 
 class HomeProfileSection extends ConsumerWidget {

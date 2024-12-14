@@ -18,6 +18,7 @@ class CustomTextField extends HookWidget {
   final TextInputType? textInputType;
   final Widget? suffix;
   final double? boarderRadius;
+  final int? maxLines;
 
   const CustomTextField({
     super.key,
@@ -35,6 +36,7 @@ class CustomTextField extends HookWidget {
     this.textInputType,
     this.suffix,
     this.boarderRadius,
+    this.maxLines,
   });
 
   @override
@@ -44,8 +46,13 @@ class CustomTextField extends HookWidget {
 
     return SizedBox(
       width: width,
-      height: errorText.value == null ? height ?? 44 : 70, // Adjust height only when error is present
+      height: (errorText.value == null
+          ? maxLines != null
+              ? ((height ?? 44) * (maxLines ?? 1).toDouble())
+              : (height ?? 44)
+          : 70),
       child: TextFormField(
+        maxLines: maxLines ?? 1,
         keyboardType: textInputType,
         controller: controller,
         focusNode: focusNode,
@@ -60,32 +67,32 @@ class CustomTextField extends HookWidget {
           labelText: label,
           labelStyle: Theme.of(context).textTheme.bodySmall,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(boarderRadius??8),
+            borderRadius: BorderRadius.circular(boarderRadius ?? 8),
             borderSide: BorderSide(
               color: Colors.grey[100]!,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(boarderRadius??8),
+            borderRadius: BorderRadius.circular(boarderRadius ?? 8),
             borderSide: BorderSide(
               color: ColorCode.colorList(context).primary!,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(boarderRadius??8),
+            borderRadius: BorderRadius.circular(boarderRadius ?? 8),
             borderSide: BorderSide(
               color: ColorCode.colorList(context).borderColor!,
             ),
           ),
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(boarderRadius??8),
+            borderRadius: BorderRadius.circular(boarderRadius ?? 8),
             borderSide: const BorderSide(
               color: Colors.red,
               width: 1.0,
             ),
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(boarderRadius??8),
+            borderRadius: BorderRadius.circular(boarderRadius ?? 8),
             borderSide: const BorderSide(
               color: Colors.red,
               width: 1.0,
@@ -114,7 +121,7 @@ class CustomTextField extends HookWidget {
         cursorColor: ColorCode.colorList(context).primary,
         validator: (value) {
           final validationResult = validator?.call(value);
-          errorText.value = validationResult; // Update errorText state
+          errorText.value = validationResult; 
           return validationResult;
         },
       ),

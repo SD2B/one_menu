@@ -7,9 +7,11 @@ import 'package:one_menu/helpers/common_enums.dart';
 import 'package:one_menu/helpers/constants.dart';
 import 'package:one_menu/helpers/local_storage.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
+import 'package:one_menu/onboarding.dart';
 import 'package:one_menu/view/favorites/favorites.dart';
 import 'package:one_menu/view/home/home.dart';
 import 'package:one_menu/view/login_screen.dart';
+import 'package:one_menu/view/menu/add/add_menu.dart';
 import 'package:one_menu/view/menu/view/item_view.dart';
 import 'package:one_menu/view/profile/profile.dart';
 
@@ -58,18 +60,6 @@ List<RouteBase> _buildRoutes() {
   ];
 }
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SvgPicture.asset("assets/oneMenu.svg"),
-      ),
-    );
-  }
-}
 
 List<GoRoute> _staticRoutes() {
   return [
@@ -124,13 +114,10 @@ List<GoRoute> _homeRoutes() {
       ),
     ),
     GoRoute(
-      path: '${RouteEnum.itemView.name}/:id', // Define the path with the parameter :id
+      path: '${RouteEnum.itemView.name}/:id',
       name: RouteEnum.itemView.name,
       pageBuilder: (BuildContext context, GoRouterState state) {
-        final id = int.tryParse(state.pathParameters['id'] ?? ''); // Convert the 'id' to an int
-        // if (id == null) {
-        //   return ErrorPage(); // Handle invalid 'id'
-        // }
+        final id = int.tryParse(state.pathParameters['id'] ?? '');
         return CustomTransitionPage(
           key: state.pageKey,
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -139,27 +126,26 @@ List<GoRoute> _homeRoutes() {
               child: child,
             );
           },
-          child: ItemView(id: id ?? 0), // Pass the 'id' as an integer
+          child: ItemView(id: id ?? 0),
         );
       },
-    )
-
-    // GoRoute(
-    //   path: RouteEnum.itemView.name,
-    //   name: RouteEnum.itemView.name,
-    //   pageBuilder: (BuildContext context, GoRouterState state) => CustomTransitionPage(
-    //     key: state.pageKey,
-    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    //       return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
-    //     },
-    //     child: const ItemView(),
-    //   ),
-    // ),
+    ),
+    GoRoute(
+      path: RouteEnum.addMenu.name,
+      name: RouteEnum.addMenu.name,
+      pageBuilder: (BuildContext context, GoRouterState state) => CustomTransitionPage(
+        key: state.pageKey,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: CurveTween(curve: Curves.easeInOutSine).animate(animation), child: child);
+        },
+        child: const CustomScaffold(enableBack: true, child: AddMenu()),
+      ),
+    ),
   ];
 }
 
 Future<bool> getLoginData() async {
-  await Future.delayed(const Duration(seconds: 3)); // Add 3-second delay
+  await Future.delayed(const Duration(seconds: 3)); 
 
   try {
     List<Map<String, dynamic>> loginData = await LocalStorage.get(DBTable.login);

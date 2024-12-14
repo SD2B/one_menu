@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:one_menu/common_widgets/loading_widget.dart';
-import 'package:one_menu/view/profile/elemets/profile_app_bar.dart';
+import 'package:one_menu/common_widgets/custom_appbar.dart';
 import 'package:one_menu/view/profile/elemets/profile_background.dart';
 import 'package:one_menu/view/profile/elemets/profile_body.dart';
 import 'package:one_menu/view/profile/elemets/profile_image.dart';

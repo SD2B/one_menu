@@ -49,6 +49,7 @@ class LocalStorage {
           .where((key) => key != 'id') // Exclude the 'id' key
           .map((key) {
         // Determine the type of the column (TEXT for simplicity)
+        // ignore: prefer_const_declarations
         final columnType = 'TEXT'; // You can customize this based on value types
         return '$key $columnType';
       }).join(', ');

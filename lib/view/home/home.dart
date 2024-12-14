@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:one_menu/common_widgets/custom_icon_button.dart';
 import 'package:one_menu/core/colors.dart';
 import 'package:one_menu/helpers/common_enums.dart';
-import 'package:one_menu/helpers/local_storage.dart';
 import 'package:one_menu/helpers/sddb_helper.dart';
 import 'package:one_menu/view/home/elements/home_profile_section.dart';
 import 'package:one_menu/view/home/elements/item_list_view.dart';
+import 'package:one_menu/view/home/elements/item_list_view_header.dart';
 import 'package:one_menu/vm/item_list_vm.dart';
 
 class Home extends ConsumerWidget {
@@ -19,7 +19,6 @@ class Home extends ConsumerWidget {
       onRefresh: () async {
         await ref.read(itemListVMProvider.notifier).getItems(isBuild: false);
         return Future.value();
-        // return await Future.delayed(Duration(seconds: 5));
       },
       color: ColorCode.colorList(context).primary,
       backgroundColor: Colors.white,
@@ -29,7 +28,7 @@ class Home extends ConsumerWidget {
           20.height,
           const HomeProfileSection(),
           8.height,
-          ItemListViewHeader(),
+          const ItemListViewHeader(),
           const ItemListView(),
         ],
       ),
@@ -37,33 +36,3 @@ class Home extends ConsumerWidget {
   }
 }
 
-class ItemListViewHeader extends StatelessWidget {
-  const ItemListViewHeader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          Text("Trending Foods", style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 28)),
-          const Spacer(),
-          CustomIconButton(
-            icon: Icons.add,
-            onTap: () async {
-              try {
-                int check = await LocalStorage.delete(DBTable.login, where: {"username": "mustak"});
-                if (check == 1) {
-                  context.goNamed(RouteEnum.login.name);
-                }
-                qp("$check");
-              } catch (e) {
-                qp(e);
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}

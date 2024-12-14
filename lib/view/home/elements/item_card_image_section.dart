@@ -14,21 +14,12 @@ class ItemCardImageSection extends StatelessWidget {
     return Container(
       height: 200,
       width: context.width(),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
-          border: Border(
-            left: BorderSide(color: ColorCode.colorList(context).borderColor!),
-            right: BorderSide(color: ColorCode.colorList(context).borderColor!),
-            top: BorderSide(color: ColorCode.colorList(context).borderColor!),
-          )),
-      child: item.imageUrl?.isNotEmpty == true
+      decoration: BoxDecoration(borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)), border: Border(left: BorderSide(color: ColorCode.colorList(context).borderColor!), right: BorderSide(color: ColorCode.colorList(context).borderColor!), top: BorderSide(color: ColorCode.colorList(context).borderColor!))),
+      child: item.image?.isNotEmpty == true
           ? ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-              ),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
               child: CachedNetworkImage(
-                imageUrl: item.imageUrl ?? "",
+                imageUrl: item.image ?? "",
                 fit: BoxFit.fill,
                 width: double.infinity,
                 height: double.infinity,

@@ -5,7 +5,7 @@ import 'package:one_menu/models/login_model.dart';
 
 class LoginRepository {
   static Future<LoginResponseModel> loginUser(LoginModel model) async {
-    LoginResponseModel responseModel = LoginResponseModel();
+    LoginResponseModel responseModel = const LoginResponseModel();
     try {
       final response = await apiClient.post(ApiHelper.login, model.toJson());
       qp('Login successful: $response');
